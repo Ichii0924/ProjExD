@@ -1,24 +1,16 @@
 import random
 import datetime
-
-
-
 alpha = 10
 miss_alpha = 2
 count=0
 max_count=5
-
 alpha_list = [chr(ord("a")+i) for i in range(26)]
-
 out_diss_alpha = []
 #for i in range(alpha):
 #    alpha_list.append(chr(random.randint(65,91)))
 num = random.sample(alpha_list, k=alpha)
 out_alpha=[j for j in num]
 out_diss_alpha=random.sample(out_alpha, k=alpha-miss_alpha)
-
-
-
 while count < max_count:
     print("=======================")
     print("対象文字:")
