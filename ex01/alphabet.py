@@ -2,6 +2,7 @@ import random
 import datetime
 
 
+
 alpha = 10
 miss_alpha = 2
 count=0
@@ -15,6 +16,7 @@ out_diss_alpha = []
 num = random.sample(alpha_list, k=alpha)
 out_alpha=[j for j in num]
 out_diss_alpha=random.sample(out_alpha, k=alpha-miss_alpha)
+
 
 
 while count < max_count:
