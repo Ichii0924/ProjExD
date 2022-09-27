@@ -34,7 +34,7 @@ while count < max_count:
             ans3 = input("２つ目の文字を入力してください:")
 
             if ans3 != ans2 and ans3 not in out_diss_alpha:
-                print("正解です。")
+                print("正解です。やるな！")
                 break       
 
             else:
