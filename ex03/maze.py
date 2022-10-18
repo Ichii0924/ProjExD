@@ -16,9 +16,6 @@ def key_up(event):
 def main_proc():
     global mx, my
     global cx, cy
-    # if key =="f":
-    #     label= tk.Label(root, text="fuck you", font=("Ricty Diminished", 20))
-    #     label.pack()
     if key == "w" or key == "Up":
         my -= 1
     if key == "s" or key == "Down":
