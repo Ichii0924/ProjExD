@@ -16,35 +16,42 @@ def key_up(event):
 def main_proc():
     global mx, my
     global cx, cy
-
-    if key == "Up":
+    # if key =="f":
+    #     label= tk.Label(root, text="fuck you", font=("Ricty Diminished", 20))
+    #     label.pack()
+    if key == "w" or key == "Up":
         my -= 1
-    if key == "Down":
+    if key == "s" or key == "Down":
         my += 1
-    if key == "Left":
+    if key == "a" or key == "Left":
         mx -= 1
-    if key == "Right":
+    if key == "d" or key == "Right":
         mx += 1
+    if key == "e":
+        mx, my = 1, 1
 
     if maze_lst[my][mx] == 0:
         cx, cy = mx*100+50, my*100+50
     else:
-        if key == "Up":
+        if key == "w" or key == "Up":
             my += 1
-        if key == "Down":
+        if key == "s" or key == "Down":
             my -= 1
-        if key == "Left":
+        if key == "a" or key == "Left":
             mx += 1
-        if key == "Right":
+        if key == "d" or key =="Right":
             mx -= 1        
 
     canv.coords("tori", cx, cy) 
     root.after(100, main_proc)
 
 
+
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("迷えるこうかとん")#練習1
+    
+
 
     canv = tk.Canvas(root, width=1500, height=900, bg="black")
     canv.pack()#練習2
@@ -62,7 +69,7 @@ if __name__ == "__main__":
     root.bind("<KeyPress>", key_down)#練習5
 
     root.bind("<KeyRelease>", key_up)#練習6
-
+    
     main_proc()#練習7
 
     root.mainloop()
