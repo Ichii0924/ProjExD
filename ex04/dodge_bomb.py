@@ -64,7 +64,7 @@ def main():
     clock = pg.time.Clock() # 練習1
     while True:
         scrn_sfc.blit(bg_sfc, bg_rct) # 練習2
-        for event in pg.event.get(): # 練習2
+        for event in pg.event.get(): 
             if event.type == pg.QUIT:
                 return
 
