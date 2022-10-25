@@ -121,7 +121,7 @@ def main():
         #練習8
         if tori_rect.colliderect(bomb_rect) or tori_rect.colliderect(second_bomb_rect) or tori_rect.colliderect(third_bomb_rect):
             fonto = pg.font.Font(None, 80)
-            txt = fonto.render("mother fucker", True, (0, 0, 0))
+            txt = fonto.render("you so bad", True, (0, 0, 0))
             scrn_sfc.blit(txt, (tori_rect.centerx-140, tori_rect.centery-110))
             pg.display.update()
             time.sleep(1)
