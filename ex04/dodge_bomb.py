@@ -24,8 +24,8 @@ def main():
     bg_rct = bg_sfc.get_rect()
 
     #練習3
-    tori_sfc = pg.image.load("fig/6.png")
-    tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
+    tori_sfc = pg.image.load("fig/tracer.png")
+    tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 0.5)
     tori_rect = tori_sfc.get_rect()
     tori_rect.center = 900, 400
 
@@ -56,9 +56,9 @@ def main():
 
 
     #練習6
-    vx, vy = +2, +2
-    s_vx, s_vy = -2, -2
-    t_vx, t_vy = +2, -2
+    vx, vy = +1.5, +1.5
+    s_vx, s_vy = -1.5, -1.5
+    t_vx, t_vy = +1.5, -1.5
 
 
     clock = pg.time.Clock() # 練習1
@@ -77,6 +77,16 @@ def main():
             tori_rect.centerx -= 1
         if key_statas[pg.K_RIGHT] or key_statas[pg.K_d]:    
             tori_rect.centerx += 1
+
+        #ブリンク
+        if key_statas[pg.K_UP] and key_statas[pg.K_e]: 
+            tori_rect.centery -= 2 
+        if key_statas[pg.K_DOWN] and key_statas[pg.K_e]:
+            tori_rect.centery += 2
+        if key_statas[pg.K_LEFT] and key_statas[pg.K_e]:
+            tori_rect.centerx -= 2
+        if key_statas[pg.K_RIGHT] and key_statas[pg.K_e]:    
+            tori_rect.centerx += 2
 
         yoko, tate = check_bound(tori_rect, scrn_rect)
         if yoko == -1 :
