@@ -10,9 +10,9 @@ if not pg.image.get_extended():
 
 # game constants
 MAX_SHOTS = 5  # most player bullets onscreen
-ALIEN_ODDS = 15  # chances a new alien appears
+ALIEN_ODDS = 15  # chances a new monkey appears
 BOMB_ODDS = 30  # chances a new bomb will drop
-ALIEN_RELOAD = 12  # frames between new aliens
+ALIEN_RELOAD = 12  # frames between new monkeys
 SCREENRECT = pg.Rect(0, 0, 1600, 900)
 SCORE = 0
 
@@ -84,7 +84,7 @@ class Player(pg.sprite.Sprite):
 
 
 class Alien(pg.sprite.Sprite):
-    """An alien space ship. That slowly moves down the screen."""
+    """An monkey space ship. That slowly moves down the screen."""
 
     speed = 13
     animcycle = 12
@@ -151,15 +151,15 @@ class Shot(pg.sprite.Sprite):
 
 
 class Bomb(pg.sprite.Sprite):
-    """A bomb the aliens drop."""
+    """A bomb the monkeys drop."""
 
     speed = 9
     images = []
 
-    def __init__(self, alien):
+    def __init__(self, monkey):
         pg.sprite.Sprite.__init__(self, self.containers)
         self.image = self.images[0]
-        self.rect = self.image.get_rect(midbottom=alien.rect.move(0, 5).midbottom)
+        self.rect = self.image.get_rect(midbottom=monkey.rect.move(0, 5).midbottom)
 
     def update(self):
         """called every time around the game loop.
@@ -217,7 +217,7 @@ def main(winstyle=0):
     Player.images = [img, pg.transform.flip(img, 1, 0)]
     img = load_image("explosion1.gif")
     Explosion.images = [img, pg.transform.flip(img, 1, 1)]
-    #Alien.images = [load_image(im) for im in ("alien1.gif", "alien2.gif", "alien3.gif")]
+    #Alien.images = [load_image(im) for im in ("monkey1.gif", "monkey2.gif", "monkey3.gif")]
     Alien.images = [load_image("chimp.png")]
     Bomb.images = [load_image("bomb.gif")]
     Shot.images = [load_image("shot.gif")]
@@ -245,15 +245,15 @@ def main(winstyle=0):
         pg.mixer.music.play(-1)
 
     # Initialize Game Groups
-    aliens = pg.sprite.Group()
+    monkeys = pg.sprite.Group()
     shots = pg.sprite.Group()
     bombs = pg.sprite.Group()
     all = pg.sprite.RenderUpdates()
-    lastalien = pg.sprite.GroupSingle()
+    lastmonkey = pg.sprite.GroupSingle()
 
     # assign default groups to each sprite class
     Player.containers = all
-    Alien.containers = aliens, all, lastalien
+    Alien.containers = monkeys, all, lastmonkey
     Shot.containers = shots, all
     Bomb.containers = bombs, all
     Explosion.containers = all
@@ -261,7 +261,7 @@ def main(winstyle=0):
 
     # Create Some Starting Values
     global score
-    alienreload = ALIEN_RELOAD
+    monkeyreload = ALIEN_RELOAD
     clock = pg.time.Clock()
 
     # initialize our starting sprites
@@ -317,38 +317,38 @@ def main(winstyle=0):
                 shoot_sound.play()
         player.reloading = firing
 
-        # Create new alien
-        if alienreload:
-            alienreload = alienreload - 1
+        # Create new monkey
+        if monkeyreload:
+            monkeyreload = monkeyreload - 1
         elif not int(random.random() * ALIEN_ODDS):
             Alien()
-            alienreload = ALIEN_RELOAD
+            monkeyreload = ALIEN_RELOAD
 
         # Drop bombs
-        if lastalien and not int(random.random() * BOMB_ODDS):
-            Bomb(lastalien.sprite)
+        if lastmonkey and not int(random.random() * BOMB_ODDS):
+            Bomb(lastmonkey.sprite)
 
-        # Detect collisions between aliens and players.
-        for alien in pg.sprite.spritecollide(player, aliens, 1):
+        # Detect collisions between monkeys and players.
+        for monkey in pg.sprite.spritecollide(player, monkeys, 1):
             if pg.mixer:
                 boom_sound.play()
-            Explosion(alien)
+            Explosion(monkey)
             Explosion(player)
             SCORE = SCORE + 1
             player.kill()
 
-        # See if shots hit the aliens.
-        for alien in pg.sprite.groupcollide(aliens, shots, 1, 1).keys():
+        # See if shots hit the monkeys.
+        for monkey in pg.sprite.groupcollide(monkeys, shots, 1, 1).keys():
            
            
            
            
             if pg.mixer:
                 boom_sound.play()
-            Explosion(alien)
+            Explosion(monkey)
             SCORE = SCORE + 1
 
-        # See if alien boms hit the player.
+        # See if monkey boms hit the player.
         for bomb in pg.sprite.spritecollide(player, bombs, 1):
             if pg.mixer:
                 boom_sound.play()
