@@ -47,19 +47,18 @@ def main():
     cong_time = 0 
     diley_frame = randint(2500,5000)# ms 2.5秒～5.0秒
     clock = pg.time.Clock()
-    flag = 0
+    flag = False
     while True:
         scr.blit()
         tori.blit(scr)
         blue_tori.blit(scr)
         #print (pg.time.get_ticks()) #デバッグ用
         if pg.time.get_ticks() >= diley_frame:
-            time_sta = time.perf_counter()
             if cong_time == 0:
                 cong_time = pg.time.get_ticks() # びっくりの瞬間を保存
             fight.blit(scr)#びっくりを表示
             CPU = cong_time + randint(270,300) # CPU設定
-            flag = 1 #フラグ1にする
+            flag = True #フラグ1にする
             if pg.time.get_ticks() >= CPU:
                 push_time = pg.time.get_ticks()
                 kanban.blit(scr)#時間を表示する看板
@@ -74,6 +73,7 @@ def main():
                 #kkt_l.blit(scr)
                 time.sleep(3)
                 return
+                
         key_states = pg.key.get_pressed() # キーを検出
         if key_states[pg.K_SPACE]: # スペースキーが検出
             push_time = pg.time.get_ticks()
